@@ -1,0 +1,209 @@
+#mCollapserUpgradeContent {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background-color: #0009;
+    z-index: 2;
+    transition: opacity var(--tFunc1) 0.3s;
+    overflow: hidden;
+}
+#mCollapserUpgradeContent > div {
+    overflow: visible;
+}
+
+
+
+#mCollapserUpgradeExit {
+    position: absolute;
+    left: calc(var(--wh) * 4); top: calc(var(--wh) * 3);
+    padding: 1vh;
+    font-size: 2em;
+    font-weight: bold;
+    background-color: #a00;
+    border-radius: 1vh;
+    box-shadow: 0 0 0.6vh #666;
+    transition:
+        background-color ease 0.2s,
+        text-shadow ease 0.2s,
+        transform var(--tFunc1) 0.3s;
+    cursor: pointer;
+    z-index: 13;
+}
+#mCollapserUpgradeExit:hover {
+    background-color: #c00;
+    text-shadow: 0 0 0.6vh #fff;
+    transform: scale(1.12);
+}
+#mCollapserUpgradeExit:active {
+    background-color: #eee;
+    text-shadow: 0 0 0.6vh #800;
+    color: #800;
+    transform: scale(1);
+    transition-duration: 0.5s;
+}
+
+
+
+#infinityDisplay {
+    position: absolute;
+    top: 4vh;
+    width: 100vw;
+    text-align: center;
+    pointer-events: none;
+    text-shadow: 0 0 0.6vh #fff, 0 0 0.3vh #fff;
+    font-size: 1.7em;
+    z-index: 20;
+}
+#infinityDisplay::before {
+    content: "You have ";
+}
+#infinityDisplay::after {
+    content: " \221e";
+}
+
+
+
+#mCollapserContentWarp {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100vw; height: 100%;
+}
+
+
+
+#mCollapserContentWarp > div {
+    flex: 1;
+}
+#mCollapserFactors, #mCollapserUpgrades {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-around;
+    width: 80vw; left: 10vw;
+
+    z-index: 20;
+}
+#mCollapserFactors {
+    top: 7vh;
+    height: 10vh;
+}
+#mCollapserUpgrades {
+    top: 17vh;
+    height: 4vh;
+    align-items: center;
+}
+
+
+
+#mCollapserUpgradeCollapseCircle {
+    font-family: 'PT Sans', sans-serif;
+
+    --s: max(20vw, 33vh);
+
+    position: absolute;
+    left: min(10vh, 2vw);
+    top: calc(50% - var(--s) / 2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ddd;
+    font-weight: 400;
+    font-size: calc(var(--s) / 4);
+    text-shadow: 0 0 1vh #503607;
+
+    width: var(--s); height: var(--s);
+    max-width: var(--s);
+    box-shadow:
+        0 0 calc(var(--s) / 12) #fff inset,
+        0 0 calc(var(--s) / 3) #222;
+    background-color: #ca932d;
+    border: #222 double calc(var(--s) / 30);
+    border-radius: 50%;
+    z-index: 12;
+
+    transition:
+        background-color var(--tFunc1) 0.3s,
+        width var(--tFunc1) 0.3s;
+}
+#mCollapserUpgradeCollapseCircle:not(.activate):after {
+    margin-left: calc(var(--s) / 30);
+    transform: translateY(50%);
+    font-size: 0.5em;
+    content: "%";
+    white-space: pre;
+}
+
+#mCollapserUpgradeCollapseCircle.activate {
+    font-size: 0;
+    background-color: #f58080;
+    animation: hueRotate 20s linear infinite;
+    cursor: pointer;
+
+}
+#mCollapserUpgradeCollapseCircle.activate:hover {
+    text-shadow: 0 0 1vh #ffffff;
+    background-color: #111;
+
+    font-weight: bold;
+    border-radius: 40%;
+    width: calc(var(--s) * 2 / 3); height: calc(var(--s) * 2 / 3);
+    border: #222 double calc(var(--s) / 30 + var(--s) / 6);
+}
+#mCollapserUpgradeCollapseCircle::after {
+    font-size: calc(var(--s) / 8);
+    content: "Collapse!";
+}
+
+#mCollapserPercentCircles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw; height: 100%;
+    pointer-events: none;
+}
+.mCollapserUpgradeCircle {
+    position: absolute;
+    width: var(--s); height: var(--s);
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    color: #888;
+    text-shadow: 0.3vh 0.3vh 0.8vh #444;
+    font-weight: bold;
+    font-size: calc(0.5em + var(--s) / 100);
+
+    border: 0.2vh solid #222;
+    box-shadow: 0 0 2vw #222 inset;
+    border-radius: 50%;
+    mix-blend-mode: difference;
+
+    z-index: 11;
+}
+#mCollapserUpgradeBgCircle {
+    position: absolute;
+    width: var(--s); height: var(--s);
+    border-radius: 50%;
+
+    background: rgb(232,208,129);
+    background: radial-gradient(
+        circle,
+        rgba(232,208,129,1) 37%,
+        rgba(255,255,255,1) 40%,
+        rgba(232,208,129,1) 50%,
+        rgba(232,208,129,1) 100%
+    );
+    box-shadow: 0 0 0.5vh #222;
+    
+    opacity: 0.85;
+
+    z-index: 10;
+    pointer-events: none;
+
+    transition: var(--s) ease-out 0.2s;
+}

@@ -1,0 +1,175 @@
+* {
+    margin: 0; padding: 0;
+    user-select: none;
+    font-family: 'Nanum Gothic Coding', monospace;
+    font-size: 1.6vh;
+
+    --wh: min(1vw, 1vh);
+    --tFunc1: cubic-bezier(.24,1,.59,.77);
+    --rainbowAnimation:
+        hueRotate 7s linear infinite,
+        rainbowPulse 20s ease-in infinite alternate;
+}
+
+.verticalAlign {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.horizontalAlign {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.bothAlign {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+sub {
+    font-size: 0.5em;
+}
+
+
+
+.helpTxt {
+    position: absolute;
+    width: 100%;
+    bottom: 1vh;
+    font-size: 0.9em;
+    font-weight: 550;
+    text-align: center;
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 100;
+}
+
+
+
+@keyframes hueRotate {
+    from {
+        filter: hue-rotate(0deg);
+    }
+    to {
+        filter: hue-rotate(360deg);
+    }
+}
+@keyframes rainbowPulse {
+    from {
+        --col: #fee;
+    }
+    to {
+        --col: #faa;
+    }
+}
+
+
+
+#screenEffects {
+    --shadowCol: #000;
+    position: absolute;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 3;
+    box-shadow:
+            0 0 min(10vh, 10vw) var(--shadowCol) inset,
+            0 0 min(10vh, 10vw) var(--shadowCol) inset,
+            0 0 min(8vh, 8vw) var(--shadowCol) inset;
+}
+
+
+
+#topContent {
+    position: relative;
+    height: 2.8vh;
+    
+    text-align: center;
+    color: white;
+
+    background: rgb(75,68,6);
+    background: linear-gradient(70deg, rgb(49, 44, 1) 11%, rgb(180, 180, 106) 100%);
+    border-bottom: 0.2vh solid #666;
+    box-shadow: 0 0 2vh rgb(255, 255, 255);
+
+    z-index: 1;
+}
+#innerTopContent {
+    white-space: nowrap;
+    text-shadow: 0 0 0.8vh #000;
+}
+
+
+
+#mainContent {
+    position: relative;
+    height: 89vh;
+    background-color: rgb(17, 17, 17);
+    color: #fff;
+    
+    z-index: 0;
+}
+#mainContent > div {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+#bottomNav {
+    height: 6.2vh;
+    background-color: #666;
+}
+#bottomProgress {
+    --progress: 50%;
+    --color: rgb(199, 149, 12);
+    position: absolute;
+    height: 1.8vh; width: 100%;
+    text-align: center;
+    background: linear-gradient(90deg, var(--color) 0, var(--color) var(--progress), #000 var(--progress));
+    z-index: 5;
+
+    white-space: nowrap;
+    overflow: hidden;
+}
+#progressText {
+    color: var(--color);
+    height: 100%;
+    font-weight: bold;
+    mix-blend-mode: difference;
+}
+
+#keyOverlay {
+    position: absolute;
+    bottom: 8.5vh;
+    left: 2vw;
+    opacity: 0.65;
+}
+#keyOverlay:hover {
+    opacity: 1;
+}
+#keyOverlay > div {
+    padding: 3vh;
+    color: #000;
+    background-color: #aaa;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 1vh #fff;
+    transition:
+        background-color ease-in-out 0.15s;
+}
+#keyOverlay > div:not(:last-of-type) {
+    margin-bottom: 1vh;
+}
+#keyOverlay > div:active {
+    color: #aaa;
+    font-weight: bold;
+    background-color: #000;
+}
+#keyOverlay > div::after {
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 2em;
+    content: attr(displayKey);
+}

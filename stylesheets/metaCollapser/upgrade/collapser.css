@@ -1,0 +1,116 @@
+#mCollapserFactors > .mCollapserFactor {
+    width: 50%;
+    text-align: center;
+    font-size: min(3.5em, 6vw);
+    font-weight: 999;
+    color: var(--col);
+    text-shadow: 0 0 0.7vh #444;
+    animation: var(--rainbowAnimation);
+}
+
+
+
+#mCollapserFactors > .mCollapserFactor:nth-child(1)::before {
+    content: "× ";
+}
+#mCollapserFactors > .mCollapserFactor:nth-child(2)::before {
+    content: "^ ";
+}
+#mCollapserFactors > .mCollapserFactor::after {
+    display: block;
+    font-size: 0.5em;
+    opacity: 0.7;
+}
+#mCollapserFactors > .mCollapserFactor:nth-child(1)::after {
+    content: "× " attr(speed) " / s";
+}
+#mCollapserFactors > .mCollapserFactor:nth-child(2)::after {
+    content: "+ " attr(speed) " / s";
+}
+
+
+
+#mCollapserUpgrades > span {
+    padding: 1vh 0;
+    text-align: center;
+    width: max(20%, 20vh);
+    filter: drop-shadow(0 0 0.5vh #666);
+}
+#mCollapserUpgrades > span::after {
+    content: " \221e"
+}
+
+
+
+#mCollapserEffects {
+    --w: calc(min(calc(30vh * 1.6 - 20vw), 80vw) + 20vw);
+    --h: min(calc(var(--w) / 1.6), calc(30vh - var(--w) / 10));
+    --m: min(var(--w), var(--h));
+
+    position: absolute;
+    width: var(--w); height: var(--h);
+    bottom: 0;
+    right: 0;
+    
+    background-color: #333a;
+    border-left: calc(var(--m) / 50) solid #fff;
+    border-top: calc(var(--m) / 50) solid #fff;
+    border-radius: calc(var(--m) / 10) 0 0 0;
+    opacity: 0.8;
+
+    z-index: 20;
+
+    pointer-events: none;
+}
+#mCollapserEffectsTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%; height: 20%;
+
+    text-align: center;
+    
+    background-color: #373737;
+    border-radius: calc(var(--m) / 15) 0 0 0;
+}
+#mCollapserEffectsTitle > div {
+    color: var(--col);
+    text-shadow: 0 0 calc(var(--m) / 30) var(--col);
+    font-size: 2em;
+    font-weight: bold;
+
+    animation: var(--rainbowAnimation);
+}
+#mCollapserEffectContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%; height: 20vh;
+}
+#mCollapserEffectContainer > div {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+    width: 95%;
+}
+#mCollapserEffectContainer > div:not(:last-child) {
+    border-bottom: calc(var(--m) / 80) solid #fff;
+}
+#mCollapserEffectContainer > div > span {
+    text-align: center;
+    font-size: 1.2em;
+}
+#mCollapserEffectContainer > div > span:nth-child(1) {
+    flex: 1;
+}
+#mCollapserEffectContainer > div > span:nth-child(2) {
+    flex: 2;
+}
+#mCollapserEffectContainer > div:nth-child(1) > span:nth-child(2)::before {
+    content: "÷ ";
+}
+#mCollapserEffectContainer > div:nth-child(2) > span:nth-child(2)::before {
+    content: "× ";
+}

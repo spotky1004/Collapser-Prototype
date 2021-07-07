@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+
+    <!-- Discord Embed -->
+    <meta content="Collapser!" property="og:title">
+    <meta content="Collapser things to reach Infinity" property="og:description">
+    <meta content="http://beta.spotky1004.p-e.kr/" property="og:url">
+    <meta content="http://beta.spotky1004.p-e.kr/res/embed_img.png" property="og:image">
+    <meta content="#ca932d" data-react-helmet="true" name="theme-color">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./stylesheets/index.css?ver=0.3.18">
+    <link rel="stylesheet" href="./stylesheets/experiment/index.css?ver=0.3.18">
+    <link rel="stylesheet" href="./stylesheets/experiment/upgrades.css?ver=0.3.18">
+    <link rel="stylesheet" href="./stylesheets/experiment/collapser.css?ver=0.3.18">
+    <link rel="stylesheet" href="./stylesheets/experiment/automation.css?ver=0.3.18">
+    <link rel="stylesheet" href="./stylesheets/metaCollapser/index.css?ver=0.3.18">
+    <link rel="stylesheet" href="./stylesheets/metaCollapser/upgrade/index.css?ver=0.3.18">
+    <link rel="stylesheet" href="./stylesheets/metaCollapser/upgrade/collapser.css?ver=0.3.18">
+    <link rel="stylesheet" href="./stylesheets/metaCollapser/upgrade/skill.css?ver=0.3.18">
+
+    <!-- Lib -->
+    <script src="./scripts/lib/breakEternityMin.js?ver=0.3.18"></script>
+    <script src="./scripts/lib/spotkyDecimalLib.js?ver=0.3.18"></script>
+    <script src="./scripts/lib/spotkyLib.js?ver=0.3.18"></script>
+
+    <!-- Class -->
+    <script src="./scripts/class/operatorParser.js?ver=0.3.18"></script>
+    <script src="./scripts/class/tier.js?ver=0.3.18"></script>
+    <script src="./scripts/class/layer.js?ver=0.3.18"></script>
+    <script src="./scripts/class/upgrade.js?ver=0.3.18"></script>
+    <script src="./scripts/class/layerUpgrade.js?ver=0.3.18"></script>
+    <script src="./scripts/class/collapser.js?ver=0.3.18"></script>
+
+    <!-- Data -->
+    <script src="./scripts/data/upgradeTypes.js?ver=0.3.18"></script>
+    <script src="./scripts/data/layerTypes.js?ver=0.3.18"></script>
+    <script src="./scripts/data/collapserFactor.js?ver=0.3.18"></script>
+    <script src="./scripts/data/collapserModule.js?ver=0.3.18"></script>
+    <script src="./scripts/data/automationDatas.js?ver=0.3.18"></script>
+    <script src="./scripts/data/effectDatas.js?ver=0.3.18"></script>
+    <script src="./scripts/data/metaMilestone.js?ver=0.3.18"></script>
+
+    <!-- Etc. -->
+    <script src="./scripts/saveload.js?ver=0.3.18"></script>
+    
+    <!-- Display / Update -->
+    <script src="./scripts/dom/mouseHandler.js?ver=0.3.18" defer></script>
+    <script src="./scripts/dom/effect.js?ver=0.3.18" defer></script>
+    <script src="./scripts/dom/updateLayer.js?ver=0.3.18" defer></script>
+    <script src="./scripts/dom/updateProgress.js?ver=0.3.18" defer></script>
+    <script src="./scripts/dom/metaClickHandler.js?ver=0.3.18" defer></script>
+    <script src="./scripts/dom/metaCollapser.js?ver=0.3.18" defer></script>
+    <script src="./scripts/dom/metaCollapserUpgrade.js?ver=0.3.18" defer></script>
+    <script src="./scripts/dom/updateAll.js?ver=0.3.18" defer></script> <!-- This must be located at the end -->
+    
+    <!-- Functions -->
+    <script src="./scripts/functions.js?ver=0.3.18"></script>
+
+    <!-- Events -->
+    <script src="./scripts/keypressEvents.js?ver=0.3.18" defer></script>
+    <script src="./scripts/windowBlur.js?ver=0.3.18" defer></script>
+    
+    <!-- Init -->
+    <script src="./scripts/initData.js?ver=0.3.18"></script>
+    <script src="./scripts/initGame.js?ver=0.3.18" defer></script>
+    <script src="./scripts/loop.js?ver=0.3.18" defer></script>
+
+    <title>Collapser</title>
+</head>
+<body>
+    <div id="topContent">
+        <div id="innerTopContent" class="bothAlign">Welcome to Collapse Lab!</div>
+    </div>
+    <div id="mainContent">
+        <div id="screenEffects" style="display: none;"><canvas id="effectCanvas"></canvas></div>
+        <div id="metaCollapserContent" style="display: none;">
+            <div id="mCollapserUpgradeContent" style="pointer-events: none;">
+                <div id="mCollapserUpgradeExit" onclick="exitMetaUpgrade();">×</div>
+                <div id="infinityDisplay">
+                    0
+                </div>
+                <div id="mCollapserFactors">
+                    <span class="mCollapserFactor" speed="1.00">
+                        1.00
+                    </span>
+                    <span class="mCollapserFactor" speed="1.00">
+                        1.00
+                    </span>
+                </div>
+                <div id="mCollapserUpgrades">
+                    <span class="mCollapserUpgrade upgradeBtn disabled" onclick="_tier.collapsers[0].buy()">
+                        1
+                    </span>
+                    <span class="mCollapserUpgrade upgradeBtn disabled" onclick="_tier.collapsers[1].buy()">
+                        1000
+                    </span>
+                </div>
+                <div id="mCollapserEffects">
+                    <div id="mCollapserEffectsTitle">
+                        <div id="mCollapserEffectsTitleTxt">Effects</div>
+                    </div>
+                    <div id="mCollapserEffectContainer">
+                        <div class="mCollapserEffect">
+                            <span class="mCollapserEffectName">Upgrade Cost</span>
+                            <span class="mCollapserEffectNum">1</span>
+                        </div>
+                        <div class="mCollapserEffect">
+                            <span class="mCollapserEffectName">Speed</span>
+                            <span class="mCollapserEffectNum">1</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="mCollapserUpgradeCollapseCircle">
+                    0.00%
+                </div>
+                <div id="mCollapserPercentCircles">
+                    
+                </div>
+                <div id="mCollapserUpgradeBgCircle"></div>
+                <div id="mCollapserSkills" style="display: none;">
+
+                </div>
+            </div>
+            <div id="mCollapsers">
+                <!--mCollapser here!-->
+            </div>
+            <div class="helpTxt">
+                Click on the "&infin;J box" to open upgrades.
+            </div>
+        </div>
+        <div id="collapserContent" style="display: none;">
+            <div id="exitExperiment" onclick="exitLayer();">< Exit Experiment (Esc)</div>
+            <div id="experimentNr">Experiment #0 (Micro)</div>
+            <div id="energyDisplay">0 J</div>
+            <div id="energyGainDisplay" class="horizontalAlign">+0 J/s</div>
+            <div class="helpTxt">Press "U" key to buy upgrades on watching tab</div>
+            <div id="innerContents">
+                <div id="innerContentsNav">
+                    <span onclick="game.playerWatching.layerTab = 0; midUpdateLayer(_layer);">Upgrades</span>
+                    <span onclick="game.playerWatching.layerTab = 1; midUpdateLayer(_layer);">Collapser</span>
+                    <span onclick="game.playerWatching.layerTab = 2; midUpdateLayer(_layer);">Automation</span>
+                </div>
+                <div id="innerContentsTabs">
+                    <div id="upgradeList" class="tab" style="display: none;">
+                        <div class="contentNamespace">Upgrades</div>
+                        <div id="upgradeWarp">
+                            <div class="upgrade">
+                                <span class="upgradeInfo">
+                                    <div>Null</div>
+                                    <div>Lv 1</div>
+                                </span>
+                                <span class="upgradeEffects">
+                                    <div>1</div>
+                                    <div>2</div>
+                                </span>
+                                <span class="upgradBtnWarp">
+                                    <div class="upgradeBtn" onclick="_layer.upgrades[0].buy()">10 J</div>
+                                </span>
+                            </div>
+                            <div class="upgrade">
+                                <span class="upgradeInfo">
+                                    <div>Null</div>
+                                    <div>Lv 1</div>
+                                </span>
+                                <span class="upgradeEffects">
+                                    <div>1</div>
+                                    <div>2</div>
+                                </span>
+                                <span class="upgradBtnWarp">
+                                    <div class="upgradeBtn" onclick="_layer.upgrades[1].buy()">10 J</div>
+                                </span>
+                            </div>
+                            <div class="upgrade">
+                                <span class="upgradeInfo">
+                                    <div>Null</div>
+                                    <div>Lv 1</div>
+                                </span>
+                                <span class="upgradeEffects">
+                                    <div>1</div>
+                                    <div>2</div>
+                                </span>
+                                <span class="upgradBtnWarp">
+                                    <div class="upgradeBtn" onclick="_layer.upgrades[2].buy()">10 J</div>
+                                </span>
+                            </div>
+                            <!-- Upgrades -->
+                        </div>
+                    </div>
+                    <div id="collapserList" class="tab" style="display: none;">
+                        <div class="contentNamespace">Collapser</div>
+                        <div id="collapserFactors">
+                            <span class="collapserFactor" speed="1.00">
+                                1.000
+                            </span>
+                            <span class="collapserFactor" speed="1.00">
+                                1.000
+                            </span>
+                        </div>
+                        <div id="collapserUpgrades">
+                            <span class="collapserUpgrade upgradeBtn" onclick="_layer.collapsers[0].buy()">
+                                1.000e10 J
+                            </span>
+                            <span class="collapserUpgrade upgradeBtn" onclick="_layer.collapsers[1].buy()">
+                                e10000 J
+                            </span>
+                        </div>
+                        <div id="collapserModules">
+                            <div class="collapserModule">
+                                <span class="collapserModuleName">Upgrade Costs</span>
+                                <span class="collapserModuleEffect">/1.00</span>
+                                <span class="collapserModuleBtnWarp">
+                                    <div class="collapserModuleButton upgradeBtn" onclick="_layer.buyCollapserModule(0)">1.00e10</div>
+                                </span>
+                            </div>
+                            <div class="collapserModule">
+                                <span class="collapserModuleName">Collapser Costs</span>
+                                <span class="collapserModuleEffect">/1.00</span>
+                                <span class="collapserModuleBtnWarp">
+                                    <div class="collapserModuleButton upgradeBtn" onclick="_layer.buyCollapserModule(1)">1.00e1000</div>
+                                </span>
+                            </div>
+                            <div class="collapserModule">
+                                <span class="collapserModuleName">Autobuy Speed</span>
+                                <span class="collapserModuleEffect">1.00/s</span>
+                                <span class="collapserModuleBtnWarp">
+                                    <div class="collapserModuleButton upgradeBtn" onclick="_layer.buyCollapserModule(2)">e100000</div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab" style="display: none;">
+                        <div class="contentNamespace">Automation</div>
+                        <div id="automationFlex">
+                            <div class="automationContainer">
+                                <span class="automationWarp">
+                                    <div>Upgrade I</div>
+                                    <div class="upgradeBtn" onclick="_layer.buyAutomation(0)">0 J</div>
+                                </span>
+                                <span class="automationWarp">
+                                    <div>Upgrade II</div>
+                                    <div class="upgradeBtn" onclick="_layer.buyAutomation(1)">0 J</div>
+                                </span>
+                                <span class="automationWarp">
+                                    <div>Upgrade III</div>
+                                    <div class="upgradeBtn" onclick="_layer.buyAutomation(2)">0 J</div>
+                                </span>
+                            </div>
+                            <div class="automationContainer">
+                                <span class="automationWarp">
+                                    <div>Collapser I</div>
+                                    <div class="upgradeBtn" onclick="_layer.buyAutomation(3)">0 J</div>
+                                </span>
+                                <span class="automationWarp">
+                                    <div>Collapser II</div>
+                                    <div class="upgradeBtn" onclick="_layer.buyAutomation(4)">0 J</div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="keyOverlay">
+        <div displayKey="U" key="u"></div>
+    </div>
+    <div id="bottomNav">
+        <span id="fpsDisplay">FPS: 0</span>
+    </div>
+    <div id="bottomProgress">
+        <div id="progressText">0% - A achievement</div>
+    </div>
+</body>
+</html>

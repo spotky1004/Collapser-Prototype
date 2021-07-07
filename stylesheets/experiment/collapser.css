@@ -1,0 +1,124 @@
+#collapserFactors, #collapserUpgrades {
+    background-color: rgb(70, 62, 41);
+}
+#collapserUpgrades {
+    border-radius: 0 0 5vh 5vh;
+    box-shadow: 0 1vh 1vh rgb(110, 110, 110);
+}
+
+#collapserFactors {
+    display: flex;
+    align-items: center;
+    height: 7vh;
+}
+.collapserFactor {
+    flex: 1;
+    text-align: center;
+    font-size: 2em;
+}
+.collapserFactor, .collapserFactor::before {
+    font-weight: bold;
+    text-shadow: 0 0 0.8vh #666;
+}
+.collapserFactor:nth-child(1)::before {
+    content: "×";
+}
+.collapserFactor:nth-child(2)::before {
+    content: "^";
+}
+.collapserFactor::after {
+    display: block;
+    font-size: 0.5em;
+    opacity: 0.7;
+}
+.collapserFactor:nth-child(1)::after {
+    content: "× " attr(speed) " / s";
+}
+.collapserFactor:nth-child(2)::after {
+    content: "+ " attr(speed) " / s";
+}
+
+#collapserUpgrades {
+    padding-bottom: 2vh;
+    display: flex;
+    align-items: center;
+}
+#collapserUpgrades > .collapserUpgrade {
+    padding: 1vh 0;
+    margin: 0 2vw;
+    width: 80%;
+}
+.collapserUpgrade {
+    flex: 1;
+    text-align: center;
+    font-size: 1.2em;
+    box-shadow: 0 0 1.5vh #222;
+}
+
+#collapserModules {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 29.3vh;
+}
+.collapserModule {
+    display: flex;
+    width: 100%;
+}
+
+.collapserModule > span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.collapserModuleName {flex: 3;}
+.collapserModuleEffect {flex: 4;}
+.collapserModuleBtnWarp {flex: 2;}
+
+.collapserModule > span > div {
+    width: 100%;
+}
+.upgradBtnWarp {
+    align-items: center;
+    width: 100%;
+}
+
+.collapserModuleName {
+    font-weight: bold;
+    font-size: min(1.5em, 4vw);
+    text-shadow: 0 0 0.8vh #fff;
+    color: rgb(219, 223, 10);
+    transition:
+        color var(--tFunc1) 0.5s,
+        text-shadow var(--tFunc1) 0.5s,
+        opacity var(--tFunc1) 0.5s;
+}
+.collapserModule:not(.bought) .collapserModuleName {
+    color: #fff;
+    text-shadow: none;
+    opacity: 0.4;
+}
+
+.collapserModuleEffect {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 1.4vh rgb(88, 76, 5), 0 0 0.8vh rgb(88, 76, 5);
+}
+.collapserModule:not(.bought) .collapserModuleEffect {
+    color: #fff;
+    text-shadow: none;
+    opacity: 0.4;
+}
+
+.collapserModuleBtnWarp > .upgradeBtn {
+    padding: 1.4vh 0;
+    width: 90%;
+}
+.collapserModule.bought > .collapserModuleBtnWarp {
+    display: none;
+}

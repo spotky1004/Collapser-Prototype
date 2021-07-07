@@ -1,0 +1,136 @@
+#mCollapsers {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    overflow-y: scroll;
+}
+#mCollapsers::-webkit-scrollbar {
+    width: max(0.6vh, 0.6vw);
+}
+#mCollapsers::-webkit-scrollbar-thumb {
+    background-color: #3cc93c;
+    border-radius: 5px;
+}
+#mCollapsers::-webkit-scrollbar-track {
+    background-color: #000;
+}
+
+
+.mCollapser {
+    display: flex;
+    flex-direction: column;
+}
+.mCollapser > div {
+    width: 100%;
+}
+
+
+.mCollapserResource {
+    --textCol: #fff;
+
+    position: relative;
+    text-align: center;
+    padding: 0.4vh 0;
+    background-color: #222;
+    box-shadow: 0 0 0.4vh #fff inset;
+    cursor: pointer;
+    color: var(--textCol);
+    transition:
+        box-shadow ease-out 0.3s,
+        background-color ease-out 0.3s,
+        color ease-out 0.3s;
+}
+.mCollapserResource.activate {
+    background-color: #bd7171;
+    animation: hueRotate 7s linear infinite;
+}
+.mCollapserResource:not(.activate):hover {
+    box-shadow: 0 0 1vh #222 inset;
+    background-color: #aaa;
+    --textCol: #333;
+}
+.mCollapserResource::after {
+    position: absolute;
+    left: calc(50% - 0.5vh);
+    transform: translateY(1.5vh);
+    width: 0; height: 0;
+    border-bottom: 1vh solid rgb(13, 151, 24);
+    border-left: 1vh solid transparent;
+    border-top: 1vh solid transparent;
+    border-right: 1vh solid transparent;
+    opacity: 0.5;
+    content: ""; /* to display */
+    pointer-events: none;
+    z-index: 1;
+}
+.mCollapserResource > span {
+    font-size: 1.5em;
+}
+.mCollapserResource > span:nth-child(1) {
+    text-shadow:
+        0 0 0.2vh var(--textCol),
+        0 0 0.5vh var(--textCol);
+}
+
+
+.mCollapserExperimentsWarp {
+    position: relative;
+    flex-direction: row;
+    height: 6vh;
+}
+.mCollapserNamespace {
+    position: absolute;
+    top: 2.5vh; left: 1vw;
+    font-size: 2.5em;
+    font-weight: bold;
+    opacity: 0.3;
+}
+.mCollapserExperiments {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 1vw;
+    height: 100%;
+    background: linear-gradient(
+        0deg,
+        rgb(0, 29, 0) 0%, rgb(0, 29, 0) 7%,
+        #000 7%, #000 72%,
+        rgb(0, 29, 0) 72%, rgb(0, 29, 0) 83%,
+        #000 83%
+    );
+    background-size: 100% 50%;
+    background-repeat: repeat-y;
+    animation: movingBg 2s linear infinite;
+}
+@keyframes movingBg {
+    from {
+        background-position: 0% 0%;
+    }
+    to {
+        background-position: 0% 100%;
+    }
+}
+.mCollapserExperiment {
+    width: max(10vw, 12vh);
+    margin-right: 1vw;
+    padding: 0.7vh 0;
+    background-color: #fff2;
+    border: 0.1vh solid #0f0;
+    text-align: center;
+    cursor: pointer;
+    font-size: min(1em, 2vw);
+}
+.mCollapserExperiment > span {
+    pointer-events: none;
+}
+.mCollapserExperiment:hover {
+    background-color: #fff6;
+}
+.mCollapserExperimentInfo {
+    font-size: 0.8em;
+}
