@@ -109,7 +109,7 @@ class Layer {
                 x = x.log(10).pow(3);
                 break;
             case 2:
-                x = x.log(10).pow(0.25).log(10);
+                x = x.add(1).log(10).pow(0.25).add(1).log(10).add(1);
                 break;
         }
         return x;
