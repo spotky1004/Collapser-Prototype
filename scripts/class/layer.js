@@ -152,6 +152,6 @@ class Layer {
         parent.infinity = parent.infinity.add(1);
 
         parent.resetLayer(this.realIdx);
-        exitLayer();
+        if (!game.playerWatching.isMetaUpgrade) exitLayer();
     }
 }
