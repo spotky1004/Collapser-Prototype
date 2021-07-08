@@ -37,7 +37,7 @@ const metaMilestone = [
     {
         type: "experiment",
         tier: 0,
-        name: "Go collapse at Nano 20 times",
+        name: "Go collapse at Yocto 1e10 times",
         title: [
             "Welcome to Milestone IV",
             "*Collapsed*",
