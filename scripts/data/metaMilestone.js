@@ -36,7 +36,7 @@ const metaMilestone = [
     },
     {
         type: "experiment",
-        tier: 2,
+        tier: 0,
         name: "Go collapse at Nano 20 times",
         title: [
             "Welcome to Milestone IV",
@@ -45,6 +45,6 @@ const metaMilestone = [
             "OkQ=",
             "Chance to see this message: 20%"
         ],
-        goal: 20
+        goal: 1e10
     }
 ];
